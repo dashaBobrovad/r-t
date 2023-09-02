@@ -2,35 +2,44 @@ import React from 'react'
 import cx from './index.module.scss';
 import { Button, Typography } from "../../../../ui";
 import { ReactComponent as RightArrowIcon } from '../../../../../../static/images/icons/arrows/right.svg';
-import { EditableImage } from "../../../components";
-import AnchorLink from "react-anchor-link-smooth-scroll";
+import { EditableImage, Slider, ISlide } from "../../../components";
 
 interface Iprops {
   isEditing: boolean,
 }
 
 export default function SchemeLayout({ isEditing }: Iprops) {
+
+  const slides: [ISlide, ISlide] = [
+    {
+      title:
+        '1 название бренда',
+    },
+    {
+      title: 'о нас',
+      description: 'о нас',
+    },
+  ];
+
   return (
     <div className={cx.wrapper}>
-      <div className={cx.top}>
+      {/* <div className={cx.top}>
         <EditableImage className={cx.image} isEditing={isEditing} />
         <Typography variant="h2" className={cx.title}>название бренда</Typography>
-      </div>
+      </div> */}
+
+
+      <Slider slides={slides} />
+
 
       <div className={cx.links}>
         <div className={cx.bricks}>
           <Typography variant="h3">категории товаров</Typography>
           <Button variant="contained" endIcon={<RightArrowIcon />}>больше</Button>
         </div>
-        <div className={cx.btns}>
-          <AnchorLink href="#products">
-            <Typography variant="h3">кнопка 1</Typography>
-            <Button variant="contained" endIcon={<RightArrowIcon />}>перейти к товарам</Button>
-          </AnchorLink>
-          <AnchorLink href="#products">
-            <Typography variant="h3">кнопка 1</Typography>
-            <Button variant="contained" endIcon={<RightArrowIcon />}>перейти к товарам</Button>
-          </AnchorLink>
+        <div className={cx.main}>
+          <Typography variant="h3">Заголовок 1</Typography>
+          <p>текстовый блок</p>
         </div>
       </div>
 
