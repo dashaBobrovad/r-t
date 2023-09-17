@@ -6,14 +6,14 @@ export default function Top() {
   return (
     <div className={cx.wrapper}>
       <Image className={cx.mainImg} />
-      <Image />
-      <Typography variant="h1">новый бренд</Typography>
-      <div>
-        <div>
-          <Typography variant="h2">kichka</Typography>
+      <Image className={cx.topImg} />
+      <div className={cx.info}>
+        <Typography variant="h1" className={cx.title}>новый бренд</Typography>
+        <Typography variant="h2">kichka</Typography>
+        <div className={cx.sub}>
           <p>Наше дело не так однозначно, как может показаться: существующая теория напрямую зависит от стандартных подходов. Идейные соображения высшего порядка, а также разбавленное изрядной долей </p>
+          <MoreLink />
         </div>
-        <MoreLink />
       </div>
     </div>
   )
