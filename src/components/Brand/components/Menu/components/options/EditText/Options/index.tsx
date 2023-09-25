@@ -4,6 +4,7 @@ import { useTypedDispatch, useTypedSelector } from "../../../../../../../../hook
 import { setBrandSettingsByField } from "../../../../../../../../redux/features/brandSetting/slice";
 import { brandSettingsTextSelector } from "../../../../../../../../redux/features/brandSetting/selectors";
 import cx from './index.module.scss';
+import { uid } from "react-uid";
 
 interface IEditTextOption {
   title: string;
@@ -27,7 +28,6 @@ const EditTextOption = ({ title, name, value }: IEditTextOption) => {
       return item;
     });
     dispatch(setBrandSettingsByField({ field: 'editText', newData }));
-    console.log(newValue)
   };
 
 
@@ -51,20 +51,20 @@ const Options = () => {
   const editText = useTypedSelector(brandSettingsTextSelector);
 
   return (
-    <div>
+    <>
       {editText?.map((field) => {
         return (
-          <div key={field.name}>
+          <span key={uid(field.name)}>
             <EditTextOption
               title={field.title}
               name={field.name}
               value={field.value}
             />
-            <Divider direction={'horizontal'} />
-          </div>
+            <Divider direction={'horizontal'} color="grey"/>
+          </span>
         );
       })}
-    </div>
+    </>
   );
 };
 
