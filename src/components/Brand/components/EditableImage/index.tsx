@@ -1,7 +1,8 @@
 import React from 'react'
-import { Button, Image } from '../../../ui';
+import { Image } from '../../../ui';
 import cls from 'classnames';
 import cx from './index.module.scss';
+import { FilesUploader } from "..";
 
 interface IProps {
   className?: string,
@@ -15,7 +16,9 @@ export default function EditableImage({ isEditing, className, src = process.env.
     <div className={cls(className, cx.editableImage)}>
       <Image src={src} alt={alt} />
       {
-        isEditing && <Button className={cx.button} colorM="">добавить фото / видео</Button>
+        isEditing && (
+          <FilesUploader><FilesUploader.Input className={cx.input} label="добавить фото / видео" /></FilesUploader>
+        )
       }
     </div>
   )
