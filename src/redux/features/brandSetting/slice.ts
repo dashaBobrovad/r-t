@@ -12,75 +12,12 @@ const initialState: TSchemeData = {
   editText: [],
   bgColor: [],
   categories: {
-    allCategories: [
-      // { title: 'верхняя одежда', name: 'outerwear' },
-      // { title: 'штаны-oversize', name: 'pants-oversize' },
-      // { title: 'category 1', name: 'category1' },
-      // { title: 'category 2', name: 'category2' },
-      // { title: 'category 3', name: 'category3' },
-      // { title: 'category 4', name: 'category4' },
-      // { title: 'category 5', name: 'category5' },
-      // { title: 'category 6', name: 'category6' },
-    ],
-    value: [
-      // { title: 'штаны-oversize', name: 'pants-oversize' }
-    ],
+    allCategories: [],
+    value: [],
   },
-  colorAndFamily: [
-    // {
-    //   title: 'название бренда',
-    //   name: 'brandName',
-    //   family: EFamilies.DelaGothicOne,
-    //   size: 32,
-    //   color: EColors.Black,
-    // },
-    // {
-    //   title: 'о нас',
-    //   name: 'about',
-    //   family: EFamilies.DelaGothicOne,
-    //   size: 32,
-    //   color: EColors.Black,
-    // },
-    // {
-    //   title: 'текст с описанием бренда (2 слайд)',
-    //   name: 'slide2',
-    //   family: EFamilies.DelaGothicOne,
-    //   size: 32,
-    //   color: EColors.Black,
-    // },
-    // {
-    //   title: 'категории товаров, кнопки 1,2',
-    //   name: 'category',
-    //   family: EFamilies.DelaGothicOne,
-    //   size: 32,
-    //   color: EColors.Black,
-    // },
-    // {
-    //   title: 'заголовок',
-    //   name: 'title',
-    //   family: EFamilies.DelaGothicOne,
-    //   size: 32,
-    //   color: EColors.Black,
-    // },
-    // {
-    //   title: 'основной текст',
-    //   name: 'mainText',
-    //   family: EFamilies.DelaGothicOne,
-    //   size: 32,
-    //   color: EColors.Black,
-    // },
-    // {
-    //   title: 'текст 2',
-    //   name: 'text',
-    //   family: EFamilies.DelaGothicOne,
-    //   size: 32,
-    //   color: EColors.Black,
-    // },
-  ],
+  colorAndFamily: [],
+  images: [],
 };
-
-// const {data} = useGetBrandPageStyle1DataQuery({ scheme_id: 0, vendor_id: "12" });
-// console.log(data);
 
 const brandSettingSlice = createSlice({
   name: "brandSettingAlias",
@@ -305,10 +242,34 @@ const brandSettingSlice = createSlice({
         newData: TSchemeData[keyof TSchemeData];
       }>,
     ) {
-      return {
-        ...state,
-        [action.payload.field]: action.payload.newData,
-      };
+      if (action.payload.field === 'images') {
+
+        const idx = state.images.findIndex(
+          (item: any) =>
+            Object.keys(item)[0] === Object.keys(action.payload.newData)[0]
+        );
+
+        if (idx !== -1) {
+          const acc = [...state.images];
+          acc[idx] = action.payload.newData;
+
+          return {
+            ...state,
+            images: acc,
+          }
+        } else {
+          return {
+            ...state,
+            images: [...state.images, action.payload.newData],
+          }
+        }
+
+      } else {
+        return {
+          ...state,
+          [action.payload.field]: action.payload.newData,
+        };
+      }
     },
 
     addCategory(state, action: PayloadAction<TCategory>) {

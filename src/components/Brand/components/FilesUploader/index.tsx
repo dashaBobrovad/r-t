@@ -1,97 +1,22 @@
-// TODO: разнести на файлы хорошо бы, чтобы повысить читаемость кода
-
 import React, {
   useState,
   useEffect,
   useCallback,
   useRef,
-  useContext,
+  ChangeEvent,
 } from 'react';
-import type { ChangeEvent } from 'react';
 
-import imageMaxResolution  from './logic/image-max-resolution.ts';
-import fileMaxSize from './logic/file-max-size.ts';
-import type { ValidationResult } from "./logic";
-
-import { useFilesFormField, FilesField } from './logic/useFilesFormField.ts';
-
-// TODO: отправляем только, когда файл загружен, тк он мб тяжелым и загружаться дольше 
-// и при отправке файла еще не будет или он будет повержден
-import { MediaFilesResponse } from "./logic/status.ts";
+import imageMaxResolution from './helpers/image-max-resolution.ts';
+import fileMaxSize from './helpers/file-max-size.ts';
+import { useFilesFormField } from './helpers/useFilesFormField.ts';
+import { UploaderProps } from "./helpers/status.ts";
 import { uid } from "react-uid";
 import useTypedDispatch from "../../../../hooks/useTypedDispatch.ts";
-import { MenuContext } from "../Menu/helpers.tsx";
-
-// const UploaderContext = React.createContext<
-//   | {
-//       isUpLoading: boolean;
-//       fileInputRef: React.RefObject<HTMLInputElement>;
-//       selectedFiles: FilesField; // тип FilesField объявлен в хуке 'useFilesFormField'
-//       handleFilesDrop: (droppedFiles: File[]) => void;
-//       handleFilesChange: (event: ChangeEvent<HTMLInputElement>) => void;
-//     }
-//   | undefined
-// >(undefined);
-
-const useFilesUploader = () => {
-  const context = useContext(MenuContext);
-
-  if (!context) {
-    throw new Error(
-      'This component must be used within a <FileUploader> component.'
-    );
-  }
-
-  return context;
-};
-
-const STATUS = {
-  initial: 'initial',
-  pending: 'pending',
-  uploaded: 'uploaded',
-  error: 'error',
-} as const;
-
-const fileFormats = ".xls,.xlsx, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel";
-
-type UploadEntry = {
-  name: string;
-  status: keyof typeof STATUS;
-  error: string | null;
-  uploaded?: MediaFilesResponse['data'][number];
-};
-
-type UploadResult = {
-  status: 'fulfilled' | 'rejected';
-  value?: {
-    status: UploadEntry['status'];
-    uploaded?: UploadEntry['uploaded'];
-    error?: UploadEntry['error'];
-  };
-  reason?: any;
-};
+import { setBrandSettingsByField } from "../../../../redux/features/brandSetting/slice.ts";
+import { UploaderContext, useFilesUploader } from "./helpers/useFilesUploader.ts";
+import { INPUT_WHITELIST } from "./helpers/constants.ts";
 
 const validators = [fileMaxSize(), imageMaxResolution()];
-
-const formatToUploadEntries = (
-  files: File[],
-  errors: ValidationResult[]
-): UploadEntry[] =>
-  files.map((file, index) => ({
-    name: file.name,
-    status: errors[index] ? STATUS.error : STATUS.pending,
-    item: undefined,
-    error: errors[index],
-  }));
-
-type UploaderProps = {
-  onFilesSelected?: () => void;
-  onFilesCleared?: () => void;
-  onUploadStart?: (uploadEntries: UploadEntry[]) => void;
-  onUploadEnd?: (uploadResult: UploadResult[]) => void;
-  onFileUploadEnd?: (file: File, obj: Partial<UploadEntry>) => void;
-  children?: React.ReactNode;
-};
 
 export const FilesUploader = (props: UploaderProps) => {
   const {
@@ -100,18 +25,21 @@ export const FilesUploader = (props: UploaderProps) => {
     onFileUploadEnd,
     onFilesSelected,
     onFilesCleared,
+    className,
     children,
+    name,
   } = props;
-
   const [isUpLoading, setUpLoading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  const dispatch = useTypedDispatch();
+
   const selectedFiles = useFilesFormField('files', validators);
 
-  // сохраняем ссылки на функции, чтобы не тригерить useEffect, так как
+  // ??? сохраняем ссылки на функции, чтобы не тригерить useEffect, так как
   // ссылка на selectedFiles будет изменятся между ре-рендерами,
   // но внутренние ссылки на объекты будут стабильны
-  const { clear: clearSelectedFiles, handleChange: handleSelectedFilesChange } =
+  const { clear: clearSelectedFiles } =
     selectedFiles;
 
   const resetUploader = useCallback(() => {
@@ -121,69 +49,25 @@ export const FilesUploader = (props: UploaderProps) => {
     onFilesCleared?.();
   }, [clearSelectedFiles, onFilesCleared]);
 
-  const handleFilesDrop = useCallback(
-    (droppedFiles: File[]) => {
-      onFilesSelected?.();
-      handleSelectedFilesChange(droppedFiles);
-    },
-    [onFilesSelected, handleSelectedFilesChange]
-  );
-
-  const dispatch = useTypedDispatch();
-
-  //
   useEffect(() => {
-    // const uploadMediaFiles = async () => {
-    //   if (selectedFiles.value.length === 0) {
-    //     return;
-    //   }
+    const uploadMediaFiles = async () => {
 
-    //   setUpLoading(true);
+      if (selectedFiles.value.length === 0) {
+        return;
+      }
+      // TODO: загружаем только 1 файл - убрать лишнее
+      selectedFiles.value
+        .filter((item, index) => !selectedFiles.error[index])
+        .map(async (file) => {
+          const options = { source: file };
+          // set image field too 
 
-    //   onUploadStart?.(
-    //     formatToUploadEntries(selectedFiles.value, selectedFiles.error)
-    //   );
+          const newData = {[name]: options.source};
+          dispatch(setBrandSettingsByField({ field: 'images', newData }));
+        })
+    };
 
-    //   const allPromises = selectedFiles.value
-    //     .filter((item, index) => !selectedFiles.error[index])
-    //     .map(async (file) => {
-    //       const options = { source: file };
-
-    //       const uploadPromise = api.post.mediaFile(options);
-    //       let uploadResult: Partial<UploadEntry> = {};
-
-    //       try {
-    //         const uploaded = await uploadPromise;
-    //         uploadResult = {
-    //           status: STATUS.uploaded,
-    //           uploaded,
-    //         };
-    //       } catch (err) {
-    //         const msg =
-    //           err instanceof Error
-    //             ? err.message
-    //             : 'Unknown Error: api.post.mediaFiles';
-    //         uploadResult = {
-    //           status: STATUS.error,
-    //           error: msg,
-    //         };
-    //       } finally {
-    //         onFileUploadEnd?.(file, uploadResult);
-    //       }
-
-    //       return uploadPromise;
-    //     });
-
-    //   const uploadingResult = await Promise.allSettled(allPromises);
-    //   onUploadEnd?.(uploadingResult);
-
-    //   resetUploader();
-    // };
-
-    // uploadMediaFiles();
-
-    // TODO: dospatch new img data (create obj)
-    console.log(selectedFiles)
+    uploadMediaFiles();
   }, [
     selectedFiles.value,
     selectedFiles.error,
@@ -206,40 +90,34 @@ export const FilesUploader = (props: UploaderProps) => {
     fileInputRef.current && (fileInputRef.current.value = '');
   };
 
-
-  // TODO: контекст у нас на более верхнем уровне - как-то туда перенести логику загрузки изображений
-  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! а мейби нам тут нужен контекст только чтобы отслеживтаь загрузку и досточно только того
-  // , что мы загрузке будем диспатчить в стоп под ключ картинки, а при сохранении тупа отправлять весь объект из стора
   return (
-    // <MenuContext.Provider
-    //   value={{
-    //     isUpLoading,
-    //     fileInputRef,
-    //     selectedFiles,
-    //     handleFilesDrop,
-    //     handleFilesChange,
-    //   }}
-    // >
-      <div>{children}</div>
-    // </MenuContext.Provider>
+    <UploaderContext.Provider
+      value={{
+        isUpLoading,
+        fileInputRef,
+        selectedFiles,
+        handleFilesChange,
+      }}
+    >
+      <div className={className}>{children && React.cloneElement(children, { id: name })}</div>
+    </UploaderContext.Provider>
   );
 };
 
 FilesUploader.Input = function Input({ label = '+ Загрузить', ...props }) {
   const { fileInputRef, handleFilesChange } = useFilesUploader();
-
+  const {id} = props;
   return (
-    <div id={uid(1)} className={props.className}>
+    <div id={uid(id)}>
       <input
         ref={fileInputRef}
         type='file'
-        multiple
         onChange={handleFilesChange}
-        id='file-uploader-input-button'
-        accept={fileFormats}
+        id={`file-uploader-input-button-${id}`}
+        accept={INPUT_WHITELIST}
       />
       <label
-        htmlFor='file-uploader-input-button'
+        htmlFor={`file-uploader-input-button-${id}`}
       >
         {label}
       </label>

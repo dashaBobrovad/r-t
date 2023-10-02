@@ -14,44 +14,12 @@ interface IProps {
     component: ReactNode,
     isEditing: boolean,
     setIsEditing: (val: boolean) => void,
+    data: TSchemeData,
 }
 
-export default function Layout({ isEditable, component, isEditing, setIsEditing }: IProps) {
+export default function Layout({ isEditable, component, isEditing, setIsEditing, data }: IProps) {
     const productsPlug = Array(27).fill(null);
     const [activeMenu, setActiveMenu] = useState(ELabelsName.DefaultList);
-
-
-    // TODO: mock
-    const schemeData = {
-        editText: [{
-            name: "string",
-            value: "string",
-            title: "string",
-        }],
-        bgColor: [{
-            title: "string",
-            name: "string",
-            // value: '#A175FF',
-        }],
-        colorAndFamily: [{
-            title: "string",
-            name: "string",
-            family: EFamilies.DelaGothicOne,
-            size: 999,
-            color: EColors.Black,
-        }],
-        categories: {
-            value: [{
-                title: "string",
-                name: "string",
-            }],
-            allCategories: [{
-                title: "string",
-                name: "string",
-            }],
-        },
-    };
-
 
     const { schemeId } = useParams();
 
@@ -60,8 +28,7 @@ export default function Layout({ isEditable, component, isEditing, setIsEditing 
     };
 
     const updateData = (newData: TSchemeData) => {
-        console.log({ newData, schemeData });
-        // TODO: add schemeData (данные заполненного поля - записывается в стэйт (мне кажется, тут достаточно контекста))
+        console.log({ newData, data });
     };
 
     const initialContextValue: IMenuContext = useMemo(() => {
@@ -69,7 +36,7 @@ export default function Layout({ isEditable, component, isEditing, setIsEditing 
             setActiveMenu,
             toHome,
             schemeNum: Number(schemeId) as TSchemeNum,
-            schemeData: schemeData,
+            schemeData: data,
             updateData,
         };
     }, [schemeId]);
