@@ -1,4 +1,4 @@
-import { ChangeEvent, MouseEvent, useContext, useState } from 'react';
+import { MouseEvent, useContext, useState } from 'react';
 
 import Container from '../../Container';
 import { MenuContext } from "../../../helpers";
@@ -21,7 +21,7 @@ const Categories = () => {
   //   brandSettingsCategoriesSelector,
   // );
 
-  // TODO: mock ( на бэке не готовы категории )
+  // TODO: mock
   const currentCategories = [{
     title: "string",
     name: "string",
@@ -68,7 +68,8 @@ const Categories = () => {
       </p>
       <Input
         placeholder={'название категории'}
-        onChange={(e: ChangeEvent<HTMLInputElement>) => onSearch(e.target.value)}
+        // TODO: fix any
+        onChange={(e: any) => onSearch(e.target.value)}
       />
       <div className={cx.searchResult}>
         {allCategoriesFiltered.map((item) => {

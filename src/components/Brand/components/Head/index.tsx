@@ -5,16 +5,14 @@ import { Menu } from "..";
 import cls from 'classnames';
 import cx from './index.module.scss';
 import Confirm from "../../../ui/Confirm";
-import { ELabelsName } from "../Menu/models";
 
 interface IProps {
     isEditable: boolean,
     isEditing: boolean,
     setIsEditing: (val: boolean) => void,
-    activeMenu: ELabelsName,
 }
 
-export default function Head({ isEditable, isEditing, setIsEditing, activeMenu }: IProps) {
+export default function Head({ isEditable, isEditing, setIsEditing }: IProps) {
     const [visibleMenu, setVisibleMenu] = useState(true);
 
     const toggleMenu = () => setVisibleMenu((prev) => !prev);
@@ -51,20 +49,21 @@ export default function Head({ isEditable, isEditing, setIsEditing, activeMenu }
 
             {
                 isEditable
-                    ? (!isEditing ? (<Button onClick={onEditClick}  >редактировать</Button>) : (
+                    // TODO: return !isEditing
+                    ? (isEditing ? (<Button onClick={onEditClick}  >редактировать</Button>) : (
                         <div className={cx.btnsList}>
                             <Button onClick={handleOpenCancelConfirm}>отменить</Button>
                             <Button onClick={handleOpenSaveConfirm}>сохранить</Button>
                             <Button viewType="iconBtn" onClick={toggleMenu} isActive={visibleMenu}><EditIcon /></Button>
-                            <Menu visible={visibleMenu} activeMenu={activeMenu} />
+                            <Menu visible={visibleMenu} />
                         </div>
                     ))
                     : null
             }
 
             <Confirm
-                visible={isSaveOpen}
-                onClose={handleCloseSaveConfirm}
+                visible={isCancelOpen}
+                onClose={handleCloseCancelConfirm}
                 buttons={
                     <>
                         <Button onClick={() => { }}>отменить</Button>
@@ -76,8 +75,8 @@ export default function Head({ isEditable, isEditing, setIsEditing, activeMenu }
             </Confirm>
 
             <Confirm
-                visible={isCancelOpen}
-                onClose={handleCloseCancelConfirm}
+                visible={isSaveOpen}
+                onClose={handleCloseSaveConfirm}
                 buttons={
                     <>
                         <Button onClick={handleCloseSaveConfirm}>назад</Button>

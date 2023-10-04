@@ -2,7 +2,7 @@ import { ReactNode, useEffect, useRef, useState } from 'react';
 
 import {ReactComponent as MinusIcon} from '../../../../static/images/icons/minus.svg';
 import cx from './index.module.scss';
-import cls from 'classnames';
+import classNames from 'classnames';
 import {Typography, Image} from '../../ui'
 
 interface IProps {
@@ -44,16 +44,16 @@ const Collapse = ({
   }, [isClose]);
 
   return (
-    <div className={cls(cx.wrapper, {[cx.active]: !isClose})}>
+    <div className={cx.wrapper}>
       {!hideCollapseIcon && (
         <div className={cx.collapseIcon} onClick={toggleOpen}>
           <MinusIcon className={cx.minus} />
-          <MinusIcon className={cls(cx.minus, { [cx.rotate]: isClose })} />
+          <MinusIcon className={classNames(cx.minus, { [cx.rotate]: isClose })} />
         </div>
       )}
-      <p className={cx.title} onClick={toggleOpen}>
+      <Typography variant="h3" className={cx.title} onClick={toggleOpen}>
         {title}
-      </p>
+      </Typography>
 
       <div className={cx.content} ref={contentRef}>
         {content}

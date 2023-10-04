@@ -21,30 +21,33 @@ const defaultColors: IColor[] = Object.entries(EColors).map(
 
 export interface IColor {
   name: string;
-  value?: string | null;
+  value?: EColors;
 }
 
 interface IColorsProps {
   colors?: IColor[];
-  value?: string | null;
-  onChange?: (color: string) => void;
+  value?: EColors;
+  onChange?: (color: EColors) => void;
 }
 
 export const Colors = ({ colors, onChange, value }: IColorsProps) => {
   return (
-    <div className={cx.colorList}>
-      {(colors || defaultColors).map((color) => (
-        <div
-          className={classNames(cx.colorItem, {
-            [cx.active]: color.value === value,
-          })}
-          key={color.value}
-          onClick={() => {
-            onChange?.(color.value || '#000000');
-          }}
-          style={{ backgroundColor: color.value || "FFFFFF"}}
-        ></div>
-      ))}
+    <div>
+      <MyTypography variant="h3">цвет</MyTypography>
+      <div className={cx.colorList}>
+        {(colors || defaultColors).map((color) => (
+          <div
+            className={classNames(cx.colorItem, {
+              [cx.active]: color.value === value,
+            })}
+            key={color.value}
+            onClick={() => {
+              onChange?.(color.value || EColors.Black);
+            }}
+            style={{ backgroundColor: color.value }}
+          ></div>
+        ))}
+      </div>
     </div>
   );
 };
