@@ -1,11 +1,18 @@
 @import '../../../../styles/vars.scss';
+@import '../../../../styles/mixins.scss';
 
 .wrapper {
     position: relative;
     z-index: 1;
+
+   
 }
 
 @media(min-width: $media-desktop) {
+    .wrapper{
+        margin-bottom: 24px;
+    }
+
     .nav {
         display: contents;
 
@@ -36,17 +43,31 @@
 }
 
 @media(max-width: $media-mobile) {
+    .wrapper{
+        margin-bottom: 16px;
+        @include outer;
+    }
 
-    .nav, .nav button {
+    .swiper{
+        @include inner;
+    }
+
+    .swiper > *{
+        display: contents;
+    }
+
+    .nav,
+    .nav button {
         display: none;
     }
 
-    .slide{
+    .slide {
         max-width: 175px;
         min-width: 175px;
-        &:not(:last-child){
+
+        &:not(:last-child) {
             margin-right: 8px;
         }
     }
-    
+
 }
