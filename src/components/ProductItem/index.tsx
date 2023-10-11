@@ -1,14 +1,8 @@
 import React, { useState } from 'react'
 import cx from './index.module.scss';
-import cls from 'classnames';
 import { Image, Button, Fav } from "../ui";
 
-interface IProps {
-    className?: string;
-    size?: 'default' | 'inSwiper';
-}
-
-export default function ProductItem({className, size = "default"}: IProps) {
+export default function ProductItem() {
     const [isFav, setIsFav] = useState(false);
 
     const onFavClick = () => {
@@ -16,7 +10,7 @@ export default function ProductItem({className, size = "default"}: IProps) {
     }
 
     return (
-        <div className={cls(cx.product, cx[size], className)}>
+        <div className={cx.product}>
             <div className={cx.image}>
                 <Fav isActive={isFav} onClick={onFavClick} className={cx.fav} />
                 <Image className={cx.img}/>
@@ -26,7 +20,7 @@ export default function ProductItem({className, size = "default"}: IProps) {
                 <p className={cx.sub}>Бренд</p>
                 <div className={cx.ftr}>
                     <Button>в корзину</Button>
-                    <p>7 500&nbsp;₽</p>
+                    <p>7 500 ₽</p>
                 </div>
             </div>
         </div>

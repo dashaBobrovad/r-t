@@ -6,5 +6,4 @@ function strokeColorReturner(isActive:boolean):string {
     }
 }
 
-import { debounce } from "./debounce";
-export {strokeColorReturner, debounce};
+export {strokeColorReturner};

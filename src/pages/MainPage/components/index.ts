@@ -1,7 +1,4 @@
 import Top from "./Top";
-import ProductSlider from "./ProductSlider";
-import ReupChoosen from './ReupChoosen';
-import Collections from "./Collections";
-import Sale from "./Sale";
+import ProductSelections from "./ProductSelections";
 
-export {Top, ProductSlider, ReupChoosen, Collections, Sale};
+export {Top, ProductSelections};

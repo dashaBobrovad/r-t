@@ -18,8 +18,9 @@ export default function Image(props: IProps) {
         <div className={cls(cx.image, className)}>
             <LazyLoadImage
                 alt={alt}
-                src={src} 
-                effect="opacity"
+                src={src} // use normal <img> attributes as props
+                effect="blur"
+
             />
         </div>
     )
