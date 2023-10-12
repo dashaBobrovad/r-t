@@ -7,8 +7,11 @@ import Fav from "./Fav";
 import Collapse from "./Collapse";
 import Input from './Input';
 import Divider from "./Divider";
+import Select from './Select';
 import {Colors, EColors, IColor} from './Colors';
 import {IRadioProps, RadioGroup} from "./Radio";
+import ImageUpload from './ImageUpload';
+import SearchableSelect from './SearchableSelect';
 import {Tabs, ETabsView} from "./Tabs"; // TODO: old
 import {Bricks, EAlign, IBrick} from "./Bricks";
 import NavLinkIcon from "./NavLinkIcon";
@@ -27,6 +30,9 @@ export {
     Divider,
     Colors, EColors,
     RadioGroup,
+    Select,
+    ImageUpload,
+    SearchableSelect,
     Tabs, ETabsView, 
     Bricks,
     NavLink,

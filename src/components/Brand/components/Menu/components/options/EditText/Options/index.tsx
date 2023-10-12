@@ -1,8 +1,4 @@
-import { useContext } from 'react';
-
 import { Collapse, Input, Divider } from '../../../../../../../ui';
-
-
 
 // import { brandSettingsTextSelector } from '@/store/brandSetting/selectors';
 // import { setBrandSettingsByField } from '@/store/brandSetting/slice';
@@ -41,7 +37,7 @@ const EditTextOption = ({ title, name, value }: IEditTextOption) => {
         <Input
           name={name}
           defaultValue={value}
-          isTextArea
+          multiline
           className={cx.textarea}
           onChange={(e) => onChange(e.target.value)}
         />

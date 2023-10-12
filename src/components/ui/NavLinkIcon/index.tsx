@@ -6,21 +6,19 @@ interface IPropsNavLinkIcon {
     to: string,
     isFill?: boolean,
     children: JSX.Element,
-    style?: React.CSSProperties,
     [x: string]: any,
 }
 
 // TODO: create NavLink with coloring svg 
 
 // component for color icons in active NavLink
-const NavLinkIcon = ({ to, isFill = true, children, style, ...props }: IPropsNavLinkIcon) => {
+const NavLinkIcon = ({ to, isFill = true, children, ...props }: IPropsNavLinkIcon) => {
     return (
-        <NavLink to={to} {...props} style={style}>
+        <NavLink to={to} {...props}>
             {({ isActive }) => (
                 React.cloneElement(children, {
                     fill: isFill ? strokeColorReturner(isActive) : "none",
                     stroke: strokeColorReturner(isActive),
-                    
                 })
             )}
         </NavLink>
