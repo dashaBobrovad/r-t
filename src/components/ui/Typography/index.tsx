@@ -1,10 +1,10 @@
-import {Typography as MuiTypography, TypographyProps} from '@mui/material';
+import {Typography, TypographyProps} from '@mui/material';
 import './index.scss';
 
-const Typography = function ({children, ...props}: TypographyProps) {
+const MyTypography = function ({children, ...props}: TypographyProps) {
   return (
-    <MuiTypography {...props}>{children}</MuiTypography>
+    <Typography {...props}>{children}</Typography>
   )
 }
 
-export default Typography;
+export default MyTypography;

@@ -1,7 +1,6 @@
 import { Button as MuiButton, ButtonProps } from '@mui/material';
 import cls from 'classnames';
 import './index.scss';
-import React from 'react';
 
 interface IProps extends ButtonProps {
   viewType?: "default" | "iconBtn",

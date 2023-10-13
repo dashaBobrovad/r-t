@@ -1,15 +1,10 @@
 import { TextField, styled } from "@mui/material";
 import { ReactComponent as SearchIcon } from '../../../../static/images/icons/search.svg';
 
-export const StyledTextField = styled(TextField)<{textarea: boolean}>`
+export const StyledTextField = styled(TextField)`
   fieldset {
     border: 1px solid black;
     border-radius: 0px;
-  }
-
-  input {
-    height: 18px;
-    padding: 16px 14px;
   }
 
   input::placeholder {
@@ -17,25 +12,9 @@ export const StyledTextField = styled(TextField)<{textarea: boolean}>`
     font-size: 16px;
   }
 
-  & .MuiInputBase-root {
-    height: ${({ textarea }) => (textarea ? '100%' : '18px')};
-  }
-
-  & .MuiFormControl-root {
-    height: ${({ textarea }) => (textarea ? '100%' : '18px')};
-  }
-
   & .MuiOutlinedInput-root {
-    min-height: 50px;
-    max-height: 240px;
+    height: 50px;
     padding-right: 20px;
-  }
-
-  & .MuiFormLabel-root {
-    font-family: 'Gilroy', sans-serif;
-    font-size: 16px;
-    position: absolute;
-    top: -2px;
   }
 `;
 
@@ -62,16 +41,4 @@ export const StyledSearchInput = styled(TextField)`
 export const StyledSearchIcon = styled(SearchIcon)`
   width: 12px;
   height: 12px;
-`;
-
-export const LimitBlock = styled('div')`
-  display: flex;
-  justify-content: right;
-  margin-top: 6px;
-  color: #828282;
-  font-size: 14px;
-
-  &.warning {
-    color: #e30613;
-  }
 `;

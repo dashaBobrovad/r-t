@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import { ErrorPage, MainPage, ProductEditPage, SchemePage, SchemeSelectionPage, StockPage } from "../../pages";
+import { ErrorPage, MainPage, SchemePage, SchemeSelectionPage, StockPage } from "../../pages";
 import { ERoutes } from "./config";
 import BrandRegistrationPage from "../../pages/crm/BrandRegistrationPage";
 
@@ -29,7 +29,7 @@ export const router = createBrowserRouter([
         element: <StockPage />
     },
     {
-        path: `${ERoutes.ProductEdit}/:id`,
-        element: <ProductEditPage />
+        path: `${ERoutes.Product}/:id`,
+        element: <></>
     },
 ])
