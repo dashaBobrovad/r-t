@@ -1,6 +1,6 @@
 import { Header, MobileToolbar } from "./Header";
 import Typography from "./Typography";
-import Button from "./Button";
+import {Button, EBtnColor} from "./Button";
 import MoreLink from "./MoreLink";
 import Image from "./Image";
 import Fav from "./Fav";
@@ -13,12 +13,13 @@ import {Tabs, ETabsView} from "./Tabs";
 import {Bricks, EAlign, IBrick} from "./Bricks";
 import NavLinkIcon from "./NavLinkIcon";
 import NavLink from "./NavLink";
+import PopUp from "./PopUp";
 
 export {
     Header,
     MobileToolbar,
     Typography,
-    Button, EAlign,
+    Button, EBtnColor, EAlign,
     MoreLink,
     Image,
     Fav,
@@ -30,7 +31,8 @@ export {
     Tabs, ETabsView, 
     Bricks,
     NavLink,
-    NavLinkIcon
+    NavLinkIcon,
+    PopUp
 };
 
 export type {
