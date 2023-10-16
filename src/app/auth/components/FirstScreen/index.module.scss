@@ -33,6 +33,7 @@
 
 .note {
     opacity: 0.5;
+    text-align: center;
 }
 
 .wrapper {
@@ -42,5 +43,13 @@
 
     .field {
         width: 100%;
+    }
+}
+
+.confirm{
+    display: flex;
+    justify-content: space-between;
+    p{
+        text-align: left;
     }
 }
