@@ -6,7 +6,9 @@ import '../styles/global.css';
 
 function App() {
   return (
-    <RouterProvider router={router} />
+    <>
+      <RouterProvider router={router} />
+    </>
   );
 }
 

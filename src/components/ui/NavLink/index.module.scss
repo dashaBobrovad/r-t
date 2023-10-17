@@ -7,9 +7,7 @@
     }
 
     svg{
+        fill: $color-primary;
         stroke: $color-primary;
-        &.isFill{
-            fill: $color-primary;
-        }
     }
 }

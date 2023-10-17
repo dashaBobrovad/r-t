@@ -1,7 +1,7 @@
 import { Header, MobileToolbar } from "./Header";
 import Footer from "./Footer";
 import Typography from "./Typography";
-import {Button, EBtnColor} from "./Button";
+import Button from "./Button";
 import MoreLink from "./MoreLink";
 import Image from "./Image";
 import Fav from "./Fav";
@@ -11,18 +11,16 @@ import Divider from "./Divider";
 import {Colors, EColors, IColor} from './Colors';
 import {IRadioProps, RadioGroup} from "./Radio";
 import {Tabs, ETabsView} from "./Tabs";
-import {Bricks, EAlign, IBrick} from "./Bricks";
+import {Bricks, EAlign, IBrick, EColorType} from "./Bricks";
 import NavLinkIcon from "./NavLinkIcon";
 import NavLink from "./NavLink";
-import PopUp from "./PopUp";
-import Checkbox from './Checkbox';
 
 export {
     Header,
     MobileToolbar,
     Footer,
     Typography,
-    Button, EBtnColor, EAlign,
+    Button, EAlign,
     MoreLink,
     Image,
     Fav,
@@ -32,11 +30,9 @@ export {
     Colors, EColors,
     RadioGroup,
     Tabs, ETabsView, 
-    Bricks,
+    Bricks, EColorType,
     NavLink,
-    NavLinkIcon,
-    PopUp,
-    Checkbox
+    NavLinkIcon
 };
 
 export type {
