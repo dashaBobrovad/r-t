@@ -1,19 +1,20 @@
 import { FormControlLabel, Checkbox as MuiCheckbox } from '@mui/material';
 
 interface Props {
-    value: boolean;
+    value?: boolean;
     label?: string;
     className?: string;
     isReverse?: boolean;
     disabled?: boolean;
-    onChange: (e: React.ChangeEvent<HTMLInputElement>, checked: boolean) => void;
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>, checked: boolean) => void;
+    name?: string,
 }
 
-const Checkbox = ({label, value, onChange, disabled} : Props) => {
+const Checkbox = ({label, value, onChange, disabled, name} : Props) => {
     if (label) {
     return (
         <FormControlLabel
-        control={<MuiCheckbox checked={value} onChange={onChange} />}
+        control={<MuiCheckbox checked={value} onChange={onChange} name={name}/>}
         disabled={disabled}
         label={label}
         />
