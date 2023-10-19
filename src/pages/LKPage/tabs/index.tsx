@@ -1,12 +1,11 @@
 import LKFav from "./LKFav";
-import LKJoin from "./LKJoin";
 import LKMain from "./LKMain";
 import LKOrders from "./LKOrders";
+import MobileFirstScreen from "./MobileFirstScreen";
 
 export {
     LKFav,
-    LKJoin,
     LKMain,
     LKOrders,
-
+    MobileFirstScreen,
 }

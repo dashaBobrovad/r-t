@@ -11,18 +11,20 @@ import Divider from "./Divider";
 import {Colors, EColors, IColor} from './Colors';
 import {IRadioProps, RadioGroup} from "./Radio";
 import {Tabs, ETabsView} from "./Tabs";
-import {Bricks, EAlign, IBrick, EColorType} from "./Bricks";
+import {Bricks, IBrick, EColorType} from "./Bricks";
+import { EBrickAlign } from "../../const";
 import NavLinkIcon from "./NavLinkIcon";
 import NavLink from "./NavLink";
 import PopUp from "./PopUp";
 import Checkbox from './Checkbox';
+import Radio from './Radio';
 
 export {
     Header,
     MobileToolbar,
     Footer,
     Typography, ETypographyWeight,
-    Button, EBtnColor, EAlign,
+    Button, EBtnColor, EBrickAlign,
     MoreLink,
     Image,
     Fav,
@@ -36,7 +38,8 @@ export {
     NavLink,
     NavLinkIcon,
     PopUp,
-    Checkbox
+    Checkbox,
+    Radio
 };
 
 export type {
