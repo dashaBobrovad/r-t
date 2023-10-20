@@ -7,14 +7,13 @@ interface Props {
     isReverse?: boolean;
     disabled?: boolean;
     onChange?: (e: React.ChangeEvent<HTMLInputElement>, checked: boolean) => void;
-    name?: string,
 }
 
-const Checkbox = ({label, value, onChange, disabled, name} : Props) => {
+const Checkbox = ({label, value, onChange, disabled} : Props) => {
     if (label) {
     return (
         <FormControlLabel
-        control={<MuiCheckbox checked={value} onChange={onChange} name={name}/>}
+        control={<MuiCheckbox checked={value} onChange={onChange} />}
         disabled={disabled}
         label={label}
         />

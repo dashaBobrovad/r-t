@@ -108,7 +108,7 @@ export default function AuthPopup({ children }: IProps) {
                             type='custom'
                             onBackClick={onBackClick}
                             isBackBtn={part?.isBackBtn}
-                            isCloseBtn={part?.isCloseBtn}
+                            isCloseBtn={part?.isCloseBtn} // add back btn
                             isBordered={false}
                             fullScreen={fullScreen}
                         >

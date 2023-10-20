@@ -1,5 +1,5 @@
 import Top from "./Top";
-import ProductSlider from "../../../components/Brand/components/Slider/ProductSlider";
+import ProductSlider from "./ProductSlider";
 import ReupChoosen from './ReupChoosen';
 import Collections from "./Collections";
 import Sale from "./Sale";
