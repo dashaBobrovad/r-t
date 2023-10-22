@@ -1,37 +1,41 @@
 import { Collapse, Colors, Divider } from '../../../../../../../ui';
-import { useTypedDispatch, useTypedSelector } from "../../../../../../../../hooks";
 import { SelectFamily, PreviewFamily, Size } from './components';
 import { EColors, EFamilies, TColorAndFamily } from "../../../../models";
-import { setBrandSettingsByField } from "../../../../../../../../redux/features/brandSetting/slice";
-import {
-  brandSettingsColorAndFamilySelector,
-  brandSettingsSelector,
-} from "../../../../../../../../redux/features/brandSetting/selectors";
-import { uid } from "react-uid";
+
+// import { setBrandSettingsByField } from '@/store/brandSetting/slice';
+// import {
+//   brandSettingsColorAndFamilySelector,
+//   brandSettingsSelector,
+// } from '@/store/brandSetting/selectors';
+// import { useAppDispatch, useAppSelector } from '@/hooks/store';
+
 import cx from './index.module.scss';
+import { uid } from "react-uid";
+
 
 const ColorOption = ({ title, color, name, family, size }: TColorAndFamily) => {
-  const dispatch = useTypedDispatch();
-  
-  const brandSettings = useTypedSelector(brandSettingsSelector);
+  // const dispatch = useAppDispatch();
+
+  // const brandSettings = useAppSelector(brandSettingsSelector);
 
   const onChange = (newValue: any, fieldName: string) => {
-    if (brandSettings) {
-      dispatch(
-        setBrandSettingsByField({
-          field: 'colorAndFamily',
-          newData: brandSettings.colorAndFamily.map((item) => {
-            if (item.name === name) {
-              return {
-                ...item,
-                [fieldName]: newValue,
-              };
-            }
-            return item;
-          }),
-        }),
-      );
-    };
+    // if (brandSettings) {
+    //   dispatch(
+    //     setBrandSettingsByField({
+    //       field: 'colorAndFamily',
+    //       newData: brandSettings.colorAndFamily.map((item) => {
+    //         if (item.name === name) {
+    //           return {
+    //             ...item,
+    //             [fieldName]: newValue,
+    //           };
+    //         }
+    //         return item;
+    //       }),
+    //     }),
+    //   );
+    // }
+    console.log("onChange")
   };
 
   return (
@@ -39,9 +43,9 @@ const ColorOption = ({ title, color, name, family, size }: TColorAndFamily) => {
       title={title}
       content={
         <div className={cx.content}>
-          <PreviewFamily family={family as EFamilies} />
-          <SelectFamily family={family as EFamilies} onChange={onChange} />
-          <Size value={size as string} onChange={onChange} />
+          <PreviewFamily family={family} />
+          <SelectFamily family={family} onChange={onChange} />
+          <Size value={size} onChange={onChange} />
           <Colors
             value={color}
             onChange={(value) => onChange(value, 'color')}
@@ -53,10 +57,19 @@ const ColorOption = ({ title, color, name, family, size }: TColorAndFamily) => {
 };
 
 const Options = () => {
-  const colorAndFamily = useTypedSelector(brandSettingsColorAndFamilySelector);
-  
+  //const colorAndFamily = useAppSelector(brandSettingsColorAndFamilySelector);
+  // TODO: mock
+  const colorAndFamily = [
+    {
+      title: "string", // имя изменяемого текста
+      name: "string", // ключ изменяемого текста
+      family: EFamilies.Gilroy, // familyName
+      size: 999,
+      color: EColors.Black,
+    }
+  ]
   return (
-    <>
+    <div>
       {colorAndFamily.map((field) => {
         return (
           <div key={uid(field.name)}>
@@ -67,11 +80,11 @@ const Options = () => {
               name={field.name}
               size={field.size}
             />
-            <Divider direction={'horizontal'} color="grey"/>
+            <Divider direction={'horizontal'} />
           </div>
         );
       })}
-    </>
+    </div>
   );
 };
 

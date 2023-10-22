@@ -1,4 +1,3 @@
-import { useContext, useState, useEffect } from "react";
 import { ReactComponent as LogoIcon } from "../../../../static/images/icons/logo.svg";
 import { ReactComponent as SearchIcon } from "../../../../static/images/icons/loype.svg";
 import { ReactComponent as HeartIcon } from "../../../../static/images/icons/heart.svg";
@@ -11,13 +10,7 @@ import cls from 'classnames';
 import { uid } from 'react-uid';
 import { ERoles, ERoutes, confReturner } from "../../../app/router/config";
 import { Link } from "react-router-dom";
-import { NavLinkIcon, NavLink, Button, EBtnColor } from "..";
-import MobileToolbar from "./MobileToolbar";
-import { DropDown } from "./components";
-import { strokeColorReturner } from "../../../helpers";
-import { lkTabsList } from "../../../const";
-import { AuthContext } from "../../../app/auth";
-import { useWindowWidth } from "../../../hooks";
+import { NavLinkIcon, NavLink } from "..";
 
 interface IProps {
   type: ERoles,
@@ -25,36 +18,12 @@ interface IProps {
 
 function Header({ type }: IProps) {
 
-  const authContextValue = useContext(AuthContext);
-
   const config = confReturner(type || null);
 
-
-  
-  const [dropdownVisible, setDropdownVisible] = useState(false);
-
-
-
-  const onDropdownClick = () => {
-    setDropdownVisible((state) => !state);
-  };
-
-  // TODO: очищаем данные о юзере в сторе 
-  const onExitCLick = () => {
-    console.log("выход");
-  }
-
-  const dropDownList = [...lkTabsList, {
-    label: authContextValue?.isAuth 
-      ? <button onClick={onExitCLick}>выход</button> 
-      : <button onClick={()=>authContextValue?.onPopupOpen(0)}>войти</button>,
-    className: cx.exit,
-    id: "exit"
-}]
   return (
     <div className={cx.header}>
       <div className={cx.container}>
-        <Link to={ERoutes.Default} className={cx.logo}><LogoIcon /></Link>
+        <Link to={ERoutes.Default} className={cx.logo}><LogoIcon  /></Link>
         <div className={cx.main}>
           <ul className={cls("as-desktop", cx.linksList)}>{config?.list.map((item) =>
 
@@ -72,12 +41,8 @@ function Header({ type }: IProps) {
         {
           config?.isActions && (
             <ul className={cls("as-desktop", cx.actions)}>
-              <li><NavLinkIcon to="/" isFill={false}><HeartIcon className={cx.icon} /></NavLinkIcon></li>
-              <li >
-                <button onClick={onDropdownClick}>
-                  <UserIcon className={cx.icon} stroke={strokeColorReturner(dropdownVisible)} />
-                </button>
-              </li>
+              <li><NavLinkIcon to="/" isFill={true}><HeartIcon className={cx.icon} /></NavLinkIcon></li>
+              <li><NavLinkIcon to="/" isFill={false}><UserIcon className={cx.icon} /></NavLinkIcon></li>
               <li><NavLinkIcon to="/" isFill={false}><BasketIcon className={cx.icon} /></NavLinkIcon></li>
             </ul>)
         }
@@ -87,16 +52,10 @@ function Header({ type }: IProps) {
             : config?.typeBtn === 'market' ? <NavLinkIcon to="/" className={cls("as-desktop", cx.typeBtn)}><MarketIcon className={cx.icon} /></NavLinkIcon>
               : null
         }
-
-
-        <DropDown
-          visible={dropdownVisible}
-          overlay={dropDownList}
-        />
-
       </div>
     </div>
   )
 }
 
-export { MobileToolbar, Header }
+import MobileToolbar from "./MobileToolbar";
+export {MobileToolbar, Header}

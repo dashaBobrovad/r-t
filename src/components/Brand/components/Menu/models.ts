@@ -1,3 +1,4 @@
+// import { EColors } from '@/components/common/Colors';
 export enum EColors {
   Pink = '#A175FF',
   Blue = '#7991F5',
@@ -28,7 +29,7 @@ export type TSchemeNum = 0 | 1 | 2;
 
 export type TEditText = {
   name: string;
-  value: string | null;
+  value: string;
   title: string;
 };
 
@@ -41,9 +42,9 @@ export type TBgColor = {
 export type TColorAndFamily = {
   title: string; // имя изменяемого текста
   name: string; // ключ изменяемого текста
-  family: EFamilies | string | null; // familyName
-  size: string | null;
-  color: string | null;
+  family: EFamilies; // familyName
+  size: number;
+  color: EColors;
 };
 
 export type TCategory = {
@@ -61,5 +62,4 @@ export type TSchemeData = {
   bgColor: TBgColor[];
   colorAndFamily: TColorAndFamily[];
   categories: TCategories;
-  images: any;
 };

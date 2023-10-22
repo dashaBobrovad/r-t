@@ -1,19 +1,10 @@
-import {Typography, TypographyProps} from '@mui/material';
+import {Typography as MuiTypography, TypographyProps} from '@mui/material';
 import './index.scss';
 
-export enum ETypographyWeight {
-  NORMAL = 'normal',
-  BOLD = 'bold',
-}
-
-interface MyTypographyProps extends TypographyProps{
-  weight?: ETypographyWeight;
-}
-
-const MyTypography = function ({children, weight = ETypographyWeight.BOLD, ...props}: MyTypographyProps) {
+const Typography = function ({children, ...props}: TypographyProps) {
   return (
-    <Typography style={{fontWeight: weight}} {...props}>{children}</Typography>
+    <MuiTypography {...props}>{children}</MuiTypography>
   )
 }
 
-export default MyTypography;
+export default Typography;

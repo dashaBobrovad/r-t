@@ -3,24 +3,12 @@ import react from '@vitejs/plugin-react'
 import eslint from 'vite-plugin-eslint';
 import svgr from "vite-plugin-svgr";
 import { defineConfig, loadEnv } from 'vite'
-import crypto from 'crypto';
 
-export default ({ command, mode }) => {
-  const env = mode === 'production' ? loadEnv(process.env.production, process.cwd()) : loadEnv(process.env.local, process.cwd());
 
-  function generateScopedName(name, filename, css) {
-    let componentName = filename.split('/')[filename.split('/').length - 2]
 
-    // Generate hash
-    const hash = crypto
-      .createHash('md5')
-      .digest('base64')
-      .substring(0, 5);
-
-    return `${componentName}__${name}__${hash}`;
-  }
-
-  return defineConfig({
+export default defineConfig(({ command, mode }) => {
+  const env = loadEnv(process.env.local, process.cwd())
+  return {
     plugins: [
       svgr(),
       react(
@@ -32,13 +20,7 @@ export default ({ command, mode }) => {
     },
     define: {
       'process.env': env,
-    },
-    css: {
-      modules: {
-        localsConvention: 'camelCase',
-        generateScopedName: mode === 'production' ? '[hash:base64:2]' : generateScopedName,
-      }
     }
 
-  })
-}
+  }
+})

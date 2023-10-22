@@ -1,28 +1,22 @@
 import { ReactNode, useEffect, useMemo } from 'react';
-import cls from 'classnames';
-import { ReactComponent as CloseSvg } from '../../../../static/images/icons/close.svg';
-import { ReactComponent as BackSvg } from '../../../../static/images/icons/arrows/back.svg';
-import { Dialog } from '@mui/material';
+import classNames from 'classnames';
+import close from '../../../../static/images/icons/close.svg';
+
+import Button from '../Button';
+import { Modal } from '@mui/material';
+
 import cx from './index.module.scss';
-import { Button } from "..";
-import { strokeColorReturner } from "../../../helpers";
 
 interface IProps {
   visible: boolean;
   children: ReactNode;
-  onClose?: () => void;
-  onBackClick?: () => void;
+  onClose: () => void;
   onSubmit?: () => void;
   type?: 'confirm' | 'alert' | 'custom';
   customButtons?: ReactNode;
-  isCloseBtn?: boolean;
-  isBordered?: boolean;
-  isBackBtn?: boolean;
-  // All other props
-  [x: string]: any;
 }
 
-const PopUp = ({ visible, children, onClose, onSubmit, type, customButtons, isCloseBtn = true, isBordered = true, isBackBtn = false, onBackClick, ...props }: IProps) => {
+const PopUp = ({ visible, children, onClose, onSubmit, type, customButtons }: IProps) => {
   useEffect(() => {
     if (visible) {
       document.body.style.overflow = 'hidden';
@@ -35,7 +29,7 @@ const PopUp = ({ visible, children, onClose, onSubmit, type, customButtons, isCl
     if (type && customButtons) {
       return (
         <div className={cx.btns}>
-          {customButtons}
+          {buttons}
         </div>
       );
     } else if (type === 'confirm') {
@@ -56,35 +50,22 @@ const PopUp = ({ visible, children, onClose, onSubmit, type, customButtons, isCl
     }
   }, []);
 
-  if (visible) {
-    return (
-      <Dialog open={visible} className={cls({[cx.fullscreen]: props.fullScreen} )} {...props}>
-        <div className={cx.backModal}>
-          <div className={cls(cx.wrapper, { [cx.bordered]: isBordered })}>
-            {
-              isCloseBtn && (
-                <button className={cx.closeBtn} onClick={onClose}>
-                  <CloseSvg stroke={strokeColorReturner(false)} />
-                </button>
-              )
-            }
-
-            {
-              isBackBtn && (
-                <button onClick={onBackClick} className={cx.backBtn}><BackSvg stroke={strokeColorReturner(false)} /></button>
-              )
-            }
-
-            <div className={cx.content}>
-              {children}
-              {buttons}
-            </div>
+  return (
+    <Modal open={visible}>
+      <div className={cx.backModal}>
+        <div className={classNames(cx.wrapper)}>
+          <span className={cx.closeBtn} onClick={onClose}>
+            <img src={close} alt={'close'} />
+          </span>
+          <div className={cx.content}>
+            {children}
+            {buttons}
           </div>
-          <span className={cx.closeMask} onClick={onClose}></span>
         </div>
-      </Dialog>
-    );
-  }
+        <span className={cx.closeMask} onClick={onClose}></span>
+      </div>
+    </Modal>
+  );
 };
 
 export default PopUp;

@@ -1,15 +1,14 @@
-import React from 'react';
-import SchemeLayout from "../SchemeLayout";
-import { IScheme2Brand } from "../../../../../types/brandTypes";
+import React from 'react'
+import SchemeLayout from "../SchemeLayout"
 
 interface IProps{
   isEditing: boolean,
   isEditable: boolean,
-  data: IScheme2Brand,
 }
 
-export default function EditablePage({isEditing, isEditable, data }: IProps) {
+
+export default function EditablePage({isEditing, isEditable }: IProps) {
   return (
-    <SchemeLayout isEditing={isEditing} isEditable={isEditable} data={data}/>
+    <SchemeLayout isEditing={isEditing} isEditable={isEditable}/>
   )
 }

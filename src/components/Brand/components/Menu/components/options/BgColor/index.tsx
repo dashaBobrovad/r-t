@@ -8,7 +8,7 @@ const BgColor = () => {
   const menuContext = useContext(MenuContext);
   return (
     <Container
-      title={'изменить цвет фона'}
+      title={'изменить цвет фона и кнопок'}
       onBack={menuContext?.toHome}
     >
       <Options />

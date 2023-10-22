@@ -1,4 +1,3 @@
-import React from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import cls from "classnames";
@@ -18,8 +17,9 @@ export default function Image(props: IProps) {
         <div className={cls(cx.image, className)}>
             <LazyLoadImage
                 alt={alt}
-                src={src} 
-                effect="opacity"
+                src={src} // use normal <img> attributes as props
+                effect="blur"
+
             />
         </div>
     )
