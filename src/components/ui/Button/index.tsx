@@ -1,16 +1,22 @@
 import { Button as MuiButton, ButtonProps } from '@mui/material';
 import cls from 'classnames';
 import './index.scss';
-import React from 'react';
+
+enum EBtnColor {
+  NOTE = "note black",
+  WHITE = "white",
+  BLACK = "black",
+  DEFAULT = "",
+}
 
 interface IProps extends ButtonProps {
   viewType?: "default" | "iconBtn",
-  colorM?: "white" | "black" | "",
+  colorM?: EBtnColor,
   iconName?: string,
   isActive?: boolean,
 }
 
-const Button = ({ children, viewType = "default", colorM = "black", iconName, isActive = false, ...props }: IProps) => {
+const Button = ({ children, viewType = "default", colorM = EBtnColor.BLACK, iconName, isActive = false, ...props }: IProps) => {
   const { variant = "outlined", size = "medium" } = props;
 
   return (
@@ -24,4 +30,4 @@ const Button = ({ children, viewType = "default", colorM = "black", iconName, is
   )
 }
 
-export default Button;
+export {Button, EBtnColor};

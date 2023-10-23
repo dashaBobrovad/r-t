@@ -4,8 +4,10 @@ export enum ERoutes {
     CrmScheme = '/crm/scheme',
     CrmSchemesMain = '/crm/schemes',
     CrmBrandRegistration = 'crm/brandRegistration',
-    Stock = '/crm/stock',
-    ProductEdit = '/crm/product'
+    CrmProduct = '/crm/product',
+    CrmStock = '/crm/stock',
+    Product = '/product',
+   
 }
 
 export enum ERoles {
@@ -23,7 +25,7 @@ const CRMLinks = [
     },
     {
       name: "склад",
-      link: ERoutes.Stock,
+      link: ERoutes.CrmStock,
     },
     {
       name: "заказы",

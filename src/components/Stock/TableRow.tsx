@@ -1,15 +1,15 @@
 import { useState } from 'react';
+//@ts-ignore
 import img from '../../../static/images/tmp.png';
-import { ReactComponent as EditIcon } from '../../../static/images/icons/edit.svg';
-import { ReactComponent as DeleteIcon } from '../../../static/images/icons/delete.svg';
-import { ReactComponent as DownArrow } from '../../../static/images/icons/downArrowSmall.svg';
-import { ReactComponent as UpArrow } from '../../../static/images/icons/upArrowSmall.svg';
+import editIcon from '../../../static/images/icons/edit.svg';
+import deleteIcon from '../../../static/images/icons/delete.svg';
+import downArrow from '../../../static/images/icons/downArrowSmall.svg';
+import upArrow from '../../../static/images/icons/upArrowSmall.svg';
 
 import cx from './index.module.scss';
 
 import { Button } from '../ui';
 import PopUp from '../ui/PopUp';
-import { Image } from '../ui';
 
 export interface StockItem {
   img: string | null;
@@ -38,7 +38,7 @@ const TableRow = ({ item }: Props) => {
       <tr className={`${cx.itemRow} ${showDetails && cx.noBorder}`}>
         <td>
           <div style={{ height: '100px' }}>
-            <Image src={img}/>
+            <img src={img} alt="img" />
           </div>
         </td>
         <td>
@@ -48,7 +48,7 @@ const TableRow = ({ item }: Props) => {
               className={cx.detailsIcon}
               onClick={() => setShowDetails(!showDetails)}
             >
-              {showDetails ? <UpArrow /> : <DownArrow />}
+              <img src={showDetails ? upArrow : downArrow} alt="details" />
             </div>
           </div>
         </td>
@@ -69,8 +69,12 @@ const TableRow = ({ item }: Props) => {
                 {'раскупили'}
               </Button>
             )}
-            <EditIcon onClick={() => {}} />
-            <DeleteIcon onClick={() => setOpen(true)} />
+            <img src={editIcon} alt="edit" onClick={() => {}} />
+            <img
+              src={deleteIcon}
+              alt="delete"
+              onClick={() => setOpen(true)}
+            />
           </div>
         </td>
       </tr>

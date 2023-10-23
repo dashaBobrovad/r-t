@@ -1,35 +1,41 @@
 import { createBrowserRouter } from "react-router-dom";
-import { ErrorPage, MainPage, ProductEditPage, SchemePage, SchemeSelectionPage, StockPage } from "../../pages";
+import { ErrorPage, MainPage, ProductPage, SchemePage, SchemeSelectionPage, StockPage } from "../../pages";
 import { ERoutes } from "./config";
 import BrandRegistrationPage from "../../pages/crm/BrandRegistrationPage";
+import { AuthPopup } from "../auth/components";
+
 
 export const router = createBrowserRouter([
     {
         path: ERoutes.Default,
-        element: <MainPage />
+        element: <AuthPopup><MainPage /></AuthPopup>
     },
     {
         path: `${ERoutes.CrmScheme}/:schemeId`,
-        element: <SchemePage />
+        element: <AuthPopup><SchemePage /></AuthPopup>
     },
     {
         path: ERoutes.CrmSchemesMain,
-        element: <SchemeSelectionPage />
+        element: <AuthPopup><SchemeSelectionPage /></AuthPopup>
     },
     {
         path: ERoutes.CrmBrandRegistration,
-        element: <BrandRegistrationPage />
+        element: <AuthPopup><BrandRegistrationPage /></AuthPopup>
     },
     {
         path: ERoutes.Error,
-        element: <ErrorPage />
+        element: <AuthPopup><ErrorPage /></AuthPopup>
     },
     {
-        path: ERoutes.Stock,
-        element: <StockPage />
+        path: ERoutes.CrmStock,
+        element: <AuthPopup><StockPage /></AuthPopup>
     },
     {
-        path: `${ERoutes.ProductEdit}/:id`,
-        element: <ProductEditPage />
+        path: `${ERoutes.CrmProduct}/:id`,
+        element: <AuthPopup><></></AuthPopup>
+    },
+    {
+        path: `${ERoutes.Product}/:id`,
+        element: <AuthPopup><ProductPage /></AuthPopup>
     },
 ])

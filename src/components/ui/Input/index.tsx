@@ -1,14 +1,11 @@
 import { InputAdornment, TextFieldProps } from '@mui/material';
-import { LimitBlock, StyledSearchIcon, StyledSearchInput, StyledTextField } from './InputStyled';
+import { StyledSearchIcon, StyledSearchInput, StyledTextField } from './InputStyled';
 
 type Props = TextFieldProps & {
     search?: boolean;
-    limit?: number;
 }
 
-const Input = ({search, limit, ...props}: Props) => {
-  const len = String(props.value).length || 0;
-
+const Input = ({search, ...props} : Props) => {
   if (search) {
     return (
       <StyledSearchInput
@@ -20,16 +17,12 @@ const Input = ({search, limit, ...props}: Props) => {
               <StyledSearchIcon />
             </InputAdornment>
         }}
+        
       />
     );
   }
 
-  return (
-    <div>
-      <StyledTextField {...props}/>
-      {limit && <LimitBlock className={len > limit - 11  ? 'warning' : ''}>{len}/{limit}</LimitBlock>}
-    </div>
-  );
+  return <StyledTextField {...props} />;
 };
 
 export default Input;

@@ -2,15 +2,16 @@ import { ReactNode, useEffect, useRef, useState } from 'react';
 
 import {ReactComponent as MinusIcon} from '../../../../static/images/icons/minus.svg';
 import cx from './index.module.scss';
-import classNames from 'classnames';
+import cls from 'classnames';
 import {Typography, Image} from '../../ui'
 
 interface IProps {
-  title: string;
+  title: string | JSX.Element;
   content: ReactNode;
   hideCollapseIcon?: boolean;
-  moreText?: string;
-  lessText?: string;
+  moreText?: string | JSX.Element;
+  lessText?: string | JSX.Element;
+  className?: string;
 }
 
 const Collapse = ({
@@ -19,6 +20,7 @@ const Collapse = ({
   moreText,
   lessText,
   hideCollapseIcon,
+  className,
 }: IProps) => {
   const contentRef = useRef<HTMLDivElement>(null);
   const [isClose, setIsClose] = useState(true);
@@ -44,16 +46,16 @@ const Collapse = ({
   }, [isClose]);
 
   return (
-    <div className={cx.wrapper}>
+    <div className={cls(cx.wrapper, {[cx.active]: !isClose}, className)}>
       {!hideCollapseIcon && (
         <div className={cx.collapseIcon} onClick={toggleOpen}>
           <MinusIcon className={cx.minus} />
-          <MinusIcon className={classNames(cx.minus, { [cx.rotate]: isClose })} />
+          <MinusIcon className={cls(cx.minus, { [cx.rotate]: isClose })} />
         </div>
       )}
-      <Typography variant="h3" className={cx.title} onClick={toggleOpen}>
+      <p className={cx.title} onClick={toggleOpen}>
         {title}
-      </Typography>
+      </p>
 
       <div className={cx.content} ref={contentRef}>
         {content}

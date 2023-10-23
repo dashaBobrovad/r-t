@@ -23,6 +23,11 @@ body {
   font-style: normal;
 }
 
+button:disabled{
+  opacity: 0.5;
+  pointer-events: none;
+}
+
 @font-face {
   font-family: 'Dela Gothic One';
   src: url('../../static/fonts/DelaGothicOne/DelaGothicOne-Regular.ttf');
@@ -287,4 +292,10 @@ p{
   font-family: "Gilroy", "sans-serif";
   letter-spacing: 1.12px;
   line-height: 110%;
+}
+
+@media(max-width:758px){
+  p{
+    font-size: 14px;
+  }
 }
