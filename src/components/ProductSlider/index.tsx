@@ -1,16 +1,16 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Swiper as SwiperComponent, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import cx from './index.module.scss';
 import { Button } from "@/components/ui";
 import SwiperConstructor, { type Swiper as SwiperRef } from 'swiper'
 import { ReactComponent as ArrowIcon } from 'S#/images/icons/arrows/default.svg';
 import cls from 'classnames';
-import ProductItem from "../../../../ProductItem";
+import ProductItem from "@/components/ProductItem";
 import { uid } from "react-uid";
-import '@/styles/swipe.scss';
 import { useWindowWidth } from "@/hooks";
+import '@/styles/swipe.scss';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import cx from './index.module.scss';
 
 interface IProductSLiderProps {
     list?: any[];
