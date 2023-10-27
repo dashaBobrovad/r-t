@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import cls from 'classnames';
-import { Typography, Button, Collapse, Image, Tooltip } from '@/components/ui'
+import { Typography, Button, Collapse, Image, Tooltip, Fav } from '@/components/ui'
 import { uid } from "react-uid";
 import { Link } from "react-router-dom";
 import { ERoutes } from "@/router/config";
 import { EFontFamily } from "@/components/ui";
 import InfoTable from "../InfoTable";
-import '@/styles/scroll.scss';
 import cx from './index.module.scss';
 
 // mock
@@ -39,40 +38,54 @@ const mockImages = [
   "https://i.ibb.co/MP1dZ3x/beautiful-cat-portrait-close-up.jpg",
   "https://i.ibb.co/1nxgCv6/isolated-closeup-shot-of-a-gray-cat-looking-into-the-camera.jpg",
   "https://i.ibb.co/6BKsZmC/the-cat-on-white-background.jpg",
+  "https://i.ibb.co/kqTTgLy/beautiful-cat-portrait-close-up-1.jpg",
+  "https://i.ibb.co/MP1dZ3x/beautiful-cat-portrait-close-up.jpg",
+  "https://i.ibb.co/1nxgCv6/isolated-closeup-shot-of-a-gray-cat-looking-into-the-camera.jpg",
+  "https://i.ibb.co/6BKsZmC/the-cat-on-white-background.jpg",
+  "https://i.ibb.co/kqTTgLy/beautiful-cat-portrait-close-up-1.jpg",
+  "https://i.ibb.co/MP1dZ3x/beautiful-cat-portrait-close-up.jpg",
+  "https://i.ibb.co/1nxgCv6/isolated-closeup-shot-of-a-gray-cat-looking-into-the-camera.jpg",
+  "https://i.ibb.co/6BKsZmC/the-cat-on-white-background.jpg",
+  "https://i.ibb.co/kqTTgLy/beautiful-cat-portrait-close-up-1.jpg",
+  "https://i.ibb.co/MP1dZ3x/beautiful-cat-portrait-close-up.jpg",
+  "https://i.ibb.co/1nxgCv6/isolated-closeup-shot-of-a-gray-cat-looking-into-the-camera.jpg",
+  "https://i.ibb.co/6BKsZmC/the-cat-on-white-background.jpg",
 ]
 
 export default function ProductInfo({ className }: IProps) {
-  const [activeImg, setActiveImg] = useState(0);
-  const [acc, setAcc] = useState(0);
+  const [activeImg, setActiveImg] = useState(1);
+  const [acc, setAcc] = useState(1);
 
   return (
     <div className={cls(cx.wrapper, className)}>
 
-      <div className={cx.imgContainer}>
-        <div className={cx.content}>
-          <div className={cls(cx.slider, "scroll scroll-vertical as-desktop")}>
-            {
-              mockImages.map((src, idx) =>
-                <button 
-                  onClick={() => {setActiveImg(idx); setAcc(idx)}} key={uid(src)} 
+      <div className={cx.content}>
+        <div className={cls(cx.images, "as-desktop")}>
+          {
+            mockImages.map((src, idx) =>
+              idx >= 2
+                ? (<button
+                  onClick={() => { setActiveImg(idx); setAcc(idx) }}
+                  key={uid(src, idx)}
                   onMouseEnter={() => setActiveImg(idx)}
-                  onMouseLeave={() => setActiveImg(acc)}  
+                  onMouseLeave={() => setActiveImg(acc)}
                 >
-                  <Image className={cls(cx.sliderImg, {[cx.active]: idx === acc})} src={src} />
-                </button>
-              )
-            }
-          </div>
-          <div className={cx.mainImgWrapper}>
-            <Image className={cx.img} src={mockImages[activeImg]} />
-            <Tooltip title="на модели с фото размер S " className={cx.tooltip}/>
-          </div>
+                  <Image src={src} className={cls(cx.subImg, { [cx.active]: idx === acc })} />
+                </button>)
+                : idx === 1
+                  ? (<div className={cx.mainImgWrapper}>
+                    <Image src={mockImages[activeImg]} className={cx.mainImg} key={uid(src, idx)} />
+                    <Tooltip title="на модели с фото размер S " className={cx.tooltip} />
+                  </div>)
+                  : (<div className={cx.mainImgWrapper}>
+                    <Image src={src} className={cx.mainImg} key={uid(src, idx)} />
+                    <Tooltip title="на модели с фото размер S " className={cx.tooltip} />
+                  </div>)
+            )
+
+          }
         </div>
-
-       
       </div>
-
-
 
       <div className={cx.info}>
         <Typography variant="h2">Блузка женская “Лэйди”</Typography>
@@ -92,7 +105,11 @@ export default function ProductInfo({ className }: IProps) {
           }
         </div>
 
-        <Button className={cx.buyBtn}>купить сейчас</Button>
+        <div className={cx.actions}>
+          <Button className={cx.buyBtn}>купить сейчас</Button>
+          <Button className={cx.basketBtn}>в корзину</Button>
+          <Button className={cls(cx.favBtn, 'as-desktop')}><Fav isActive={false} /></Button>
+        </div>
 
         <div className={cx.detailsTitle}>
           <Link to={ERoutes.Default} style={{ textDecoration: 'underline' }}><Typography variant="h6">характеристики</Typography></Link>

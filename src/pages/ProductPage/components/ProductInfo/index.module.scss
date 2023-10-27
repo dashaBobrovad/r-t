@@ -43,6 +43,13 @@
     }
 }
 
+.actions {
+    display: grid;
+    gap: 12px;
+    grid-auto-flow: column;
+    justify-content: flex-start;
+}
+
 @media(max-width: $media-mobile) {
     .wrapper {
         flex-direction: column;
@@ -66,11 +73,7 @@
         margin-bottom: calc($offset-s - var(--gap));
     }
 
-    button.buyBtn {
-        width: 100%;
-    }
-
-    button.buyBtn,
+    .actions,
     .detailsTitle,
     .infoTable {
         margin-bottom: $offset-s;
@@ -104,7 +107,9 @@
         padding-top: $margin-h6;
     }
 
-    button.buyBtn,
+    .actions {}
+
+    .actions,
     .detailsTitle,
     .infoTable {
         margin-bottom: $offset-default;
@@ -114,7 +119,7 @@
         padding: 24px 0;
     }
 
-    .imgContainer {
+    .content {
         width: 58%;
         margin-right: 24px;
         flex-shrink: 0;
@@ -123,52 +128,45 @@
         position: relative;
         align-self: flex-start;
 
-        &::before {
-            content: "";
-            display: block;
-            padding-top: 80%;
-            width: 100%;
-        }
-
-        .content {
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            display: flex;
-        }
-
-        .slider {
-            width: calc(100% - 71% - $offset-default);
+        .images {
+            width: calc(100% - $offset-default);
             margin-right: $offset-default;
             flex-shrink: 0;
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            column-gap: 24px;
+            row-gap: $offset-default;
 
-            .sliderImg {
-                width: 100%;
-                aspect-ratio: 0.7;
-                flex-shrink: 0;
-                &.active img{
+            .subImg {
+                aspect-ratio: 0.72;
+
+                &.active img {
                     border: 1px solid $color-black;
                 }
             }
-        }
 
-        .mainImgWrapper{
-            display: flex;
-            align-items: stretch;
-            width: 71%;
-            position: relative;
-            .img {
-                width: 100%;
-                aspect-ratio: 0.8;
+            .mainImgWrapper {
+                grid-column: span 4;
+                aspect-ratio: 0.68;
+                position: relative;
+
+
+                .mainImg {
+                    width: 100%;
+                    height: 100%;
+                }
+
+                .tooltip {
+                    padding-top: 16px;
+                    padding-right: 16px;
+                }
             }
 
-            .tooltip{
-                padding-top: 16px;
-                padding-right: 16px;
-            }
+
+
         }
-        
+
+
+
     }
 }
