@@ -22,8 +22,8 @@
     &.MuiButton-sizeMedium {
         max-height: 50px;
         box-sizing: border-box;
-        padding: $offset-s 24px;
-        font-size: $fontSize-default;
+        padding: 16px 24px;
+        font-size: 16px;
 
         &.icon {
             padding: 14px;
@@ -37,7 +37,7 @@
 
     &.MuiButton-sizeSmall {
         padding: 8px 24px;
-        font-size: $fontSize-default;
+        font-size: 16px;
 
         &.icon {
             padding: 4px;
@@ -64,19 +64,14 @@
 
 
     // ----------- color -----------
-    &.black :not(.icon-fav){
-        svg {
-            fill: $color-black;
-        }
-    }
-
     &.black {
         color: $color-black;
 
-        svg{
+        svg {
+            fill: $color-black;
             stroke: $color-black;
         }
-        
+
         &:hover,
         &:active,
         &.active {

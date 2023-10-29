@@ -13,9 +13,9 @@
 
 @media(max-width: $media-mobile) {
     .footer {
-        padding: 54px $offset-s 110px;
+        padding: 54px 16px 110px;
         grid-template-columns: 1fr;
-        gap: $offset-s;
+        gap: 16px;
     }
 
     .logo{
@@ -26,9 +26,9 @@
     }
 
     .socials {
-        margin-left: calc(-1 * $offset-s);
+        margin-left: -16px;
         .socialIcon {
-            margin-left: $offset-s;
+            margin-left: 16px
         }
     }
 
@@ -55,7 +55,7 @@
     .footer {
         padding: 50px;
         grid-template-columns: auto 1fr auto; 
-        gap: 50px $offset-s ;
+        gap: 50px 16px ;
         @include container-width();
     }
 
@@ -67,12 +67,12 @@
     }
 
     .socials {
-        margin-left: calc(-1 * $offset-default);
+        margin-left: -32px;
         justify-content: center;
         grid-row: 2;
         grid-column: span 3;
         .socialIcon {
-            margin-left: $offset-default
+            margin-left: 32px
         }
     }
 
@@ -80,11 +80,11 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-left: calc(-1 * $offset-default);
+        margin-left: -32px;
         flex-wrap: wrap;
 
         .link {
-            margin-left: $offset-default;
+            margin-left: 32px;
         }
     }
 

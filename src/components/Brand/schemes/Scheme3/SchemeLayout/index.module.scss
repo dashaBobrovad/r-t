@@ -72,7 +72,7 @@
 
     .banner {
         background: $color-primary;
-        padding: $offset-default $containerPadding-desktop;
+        padding: 32px $containerPadding-desktop;
         line-height: 0;
     }
 
@@ -89,7 +89,7 @@
 
         .title {
             background: $color-snow;
-            padding: $offset-default $containerPadding-desktop;
+            padding: 32px $containerPadding-desktop;
         }
     }
 
