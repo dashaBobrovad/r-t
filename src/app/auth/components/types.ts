@@ -1,4 +1,5 @@
 export enum EType {
-    LOGIN = 'login',
-    REG = 'registration',
-}
+    LOGIN = "login",
+    REG = "registration",
+  }
+  

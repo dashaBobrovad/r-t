@@ -1,21 +1,22 @@
 @import '@/styles/vars.scss';
 
 .divider {
-    &.default {
-        background: $color-black;
-    }
 
-    &.grey {
-        background: $color-gray-82;
-    }
+  &.default{
+    background: $color-black;
+  }
 
-    &.vertical {
-        width: 1px;
-        height: 100%;
-    }
+  &.grey {
+    background: $color-gray-82;
+  }
 
-    &.horizontal {
-        height: 1px;
-        width: 100%;
-    }
+  &.vertical {
+    width: 1px;
+    height: 100%;
+  }
+
+  &.horizontal {
+    height: 1px;
+    width: 100%;
+  }
 }

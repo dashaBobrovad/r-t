@@ -1,5 +1,6 @@
 @import '@/styles/vars.scss';
 
+
 .title {
     font-size: 150%;
     font-weight: bold;
@@ -34,6 +35,7 @@
         }
     }
 
+
     .info {
         // .title {
         //     font-size: 20px;
@@ -58,13 +60,14 @@
                 font-weight: bold;
                 align-self: center;
                 margin-left: 12px;
-                padding: 10px 0;
+                padding: 10px 0
             }
         }
     }
 }
 
-@media (max-width: $media-mobile) {
+
+@media(max-width: $media-mobile) {
     .product {
         &.apativeSize {
             .title {

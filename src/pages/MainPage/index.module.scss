@@ -6,6 +6,7 @@
     @include outer;
     @include inner;
     border-bottom: 1px solid $color-black;
+ 
 }
 
 .fav {
@@ -19,13 +20,13 @@
     }
 }
 
-.selection {
+.selection{
     .moreBtn {
         align-self: flex-end;
-    }
+    } 
 }
 
-@media (max-width: $media-mobile) {
+@media(max-width: $media-mobile) {
     .bricks {
         margin-bottom: $mb-lg;
     }
@@ -38,18 +39,19 @@
         padding-bottom: $offset-default;
     }
 
-    .marquee {
+    .marquee{
         padding: 24px 0;
         margin-bottom: $mb-lg-mobile;
-        svg {
+        svg{
             margin-right: 25px;
             height: 26px;
             width: auto;
         }
+        
     }
 }
 
-@media (min-width: $media-desktop) {
+@media(min-width: $media-desktop) {
     .bricks {
         margin-bottom: $mb-lg-mobile;
     }
@@ -64,15 +66,16 @@
         padding-bottom: $padding-lg;
     }
 
-    .marquee {
+    .marquee{
         padding: 50px 0;
         margin-bottom: $padding-lg;
-        .line {
-            svg {
+        .line{
+            svg{
                 margin-right: 50px;
                 height: 70px;
                 width: auto;
             }
+            
         }
     }
 }

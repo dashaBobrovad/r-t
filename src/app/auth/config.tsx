@@ -1,7 +1,8 @@
-import { FirstScreen, SecondScreen, ThirdScreen } from './components';
-import { EType } from './components/types';
+import { FirstScreen, SecondScreen, ThirdScreen } from "./components";
+import { EType } from "./components/types";
 
 const loginPopupConf = {
+
     parts: [
         {
             title: 'вход в личный кабинет',
@@ -24,7 +25,7 @@ const loginPopupConf = {
             isCloseBtn: false,
             isBackBtn: false,
         },
-    ],
+    ]
 };
 
 const regPopupConf = {
@@ -50,7 +51,7 @@ const regPopupConf = {
             isCloseBtn: false,
             isBackBtn: false,
         },
-    ],
+    ]
 };
 
-export { loginPopupConf, regPopupConf };
+export { loginPopupConf, regPopupConf }
