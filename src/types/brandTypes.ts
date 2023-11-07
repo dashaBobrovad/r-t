@@ -1,6 +1,6 @@
 interface IBrandState {
     id: string;
-    scheme_id: numbe;
+    scheme_id: number;
 }
 
 interface Brand {
