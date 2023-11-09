@@ -1,9 +1,4 @@
-import { ERoles, ERoutes } from './types';
-
-interface IHeaderLink {
-    name: string;
-    link: ERoutes;
-}
+import { ERoles, ERoutes } from "./types";
 
 //   TODO: add correct links
 const CRMLinks = [
@@ -87,4 +82,3 @@ function confReturner(type: ERoles | null) {
 }
 
 export { confReturner };
-export type { IHeaderLink };

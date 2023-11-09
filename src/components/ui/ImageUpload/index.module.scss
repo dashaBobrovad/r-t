@@ -1,4 +1,5 @@
 .common {
+
     .button {
         display: flex;
         align-items: center;
@@ -22,8 +23,9 @@
         }
     }
 }
-
+  
 .main {
+
     .button {
         display: flex;
         align-items: center;
@@ -46,9 +48,9 @@
             text-align: left;
         }
     }
-}
+    }
 
-.previewWrap {
+    .previewWrap {
     position: relative;
     transition: 1s;
 

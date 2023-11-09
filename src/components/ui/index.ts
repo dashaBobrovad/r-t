@@ -1,4 +1,4 @@
-import { Header } from './Header';
+import { Header, MobileToolbar } from './Header';
 import Footer from './Footer';
 import { Typography, EFontFamily, ETypographyWeight } from './Typography';
 import { Button, EBtnColor } from './Button';
@@ -24,6 +24,7 @@ import { Tooltip } from './Tooltip';
 
 export {
     Header,
+    MobileToolbar,
     Footer,
     Typography,
     ETypographyWeight,
@@ -43,10 +44,8 @@ export {
     Select,
     ImageUpload,
     SearchableSelect,
-    Tabs,
-    ETabsView,
-    Bricks,
-    EColorType,
+    Tabs, ETabsView, 
+    Bricks, EColorType,
     NavLink,
     NavLinkIcon,
     PopUp,

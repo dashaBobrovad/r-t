@@ -8,10 +8,11 @@ import {
     SchemeSelectionPage,
     StockPage,
     BrandRegistrationPage,
-    ProductEditPage,
+    ProductEditPage
 } from '@/pages';
 import { AuthPopup } from '../app/auth/components';
-import { ERoutes } from './types';
+import { ERoutes } from "./types";
+
 
 export const router = createBrowserRouter([
     {
@@ -64,11 +65,7 @@ export const router = createBrowserRouter([
     },
     {
         path: `${ERoutes.CrmProduct}/:id`,
-        element: (
-            <AuthPopup>
-                <ProductEditPage />
-            </AuthPopup>
-        ),
+        element: <AuthPopup><ProductEditPage/></AuthPopup>
     },
     {
         path: `${ERoutes.Product}/:id`,
