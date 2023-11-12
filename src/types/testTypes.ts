@@ -1,5 +1,5 @@
 export interface TestData {
-    someData: any[];
+    someData: string[];
 }
 
 export interface TestRequest {
