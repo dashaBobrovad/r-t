@@ -42,6 +42,7 @@ export default function LKPage() {
                 colorType={EColorType.FILL}
                 className={cx.bricks}
             />
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, placeat.
             <div>{currentTab}</div>
         </MainLayout>
     );
