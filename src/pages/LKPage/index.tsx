@@ -33,7 +33,7 @@ export default function LKPage() {
         ),
     };
 
-    const currentTab = tabs[tabName as keyof TTabName | any];
+    const currentTab = tabs[tabName as keyof TTabName];
 
     return (
         <MainLayout>
